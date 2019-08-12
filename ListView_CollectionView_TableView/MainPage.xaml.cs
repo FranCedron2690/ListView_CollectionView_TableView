@@ -11,6 +11,7 @@ using ListView_CollectionView_TableView.Model;
 using ListView_CollectionView_TableView.Services;
 using SQLite;
 using Xamarin.Forms;
+using ListView_CollectionView_TableView.Helpers;
 
 namespace ListView_CollectionView_TableView
 {
@@ -19,12 +20,19 @@ namespace ListView_CollectionView_TableView
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        
+
         string DBPath = "";
         SQLiteAsyncConnection _sqlConection;
+
+        ViewModel binding = new ViewModel();
+        
 
         public MainPage()
         {
             InitializeComponent();
+
+            BindingContext = binding;
 
             DBPath = DependencyService.Get<IPathService>().GetDataBasePath("MiBD.db");
             Debug.WriteLine("Ruta: " + DBPath);
@@ -42,33 +50,33 @@ namespace ListView_CollectionView_TableView
 
             await _sqlConection.CreateTableAsync<DO_Users>().ConfigureAwait(false);
 
-            //DO_Users user = new DO_Users
-            //{
-            //    Nombre = "Jose A",
-            //    Apellido = "Cedrón",
-            //    Edad = 28,
-            //    FechaNacimiento = DateTime.Now,
-            //    Genero = "Masculino",
-            //};
-
-            //DO_Users user2 = new DO_Users
-            //{
-            //    Nombre = "Adela",
-            //    Apellido = "Cedrón",
-            //    Edad = 28,
-            //    FechaNacimiento = DateTime.Now,
-            //    Genero = "Masculino",
-            //};
-
-            //await SaveItemAsync(user);
-            //await SaveItemAsync(user2);
-
-            var users = await GetItemsAsync();
-
-            foreach (DO_Users user in users)
+            DO_Users user = new DO_Users
             {
-                Debug.WriteLine(user.Nombre);
-            }
+                Nombre = "Jose A",
+                Apellido = "Cedrón",
+                Edad = 28,
+                FechaNacimiento = DateTime.Now,
+                Genero = "Masculino",
+            };
+
+            DO_Users user2 = new DO_Users
+            {
+                Nombre = "Adela",
+                Apellido = "Cedrón",
+                Edad = 28,
+                FechaNacimiento = DateTime.Now,
+                Genero = "Masculino",
+            };
+
+            await SaveItemAsync(user);
+            await SaveItemAsync(user2);
+
+            //var users = await GetItemsAsync();
+
+            //foreach (DO_Users user in users)
+            //{
+            //    Debug.WriteLine(user.Nombre);
+            //}
         }
 
         public Task<List<DO_Users>> GetItemsAsync()

@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.listview_collectionview_tableview">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
-	<application android:label="ListView_CollectionView_TableView.Android"></application>
+	<application android:label="ListView_CollectionView_TableView.Android">
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.mydomain.fileprovider" android:exported="false" android:grantUriPermissions="true"></provider>
+	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
